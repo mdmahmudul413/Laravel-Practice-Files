@@ -12,7 +12,7 @@
    folder app/Http/controller/controller.php: This is a central unit which control modal and view it means its a middle 
    layer of the database and Html pages.
 
-   folder app/Http/Middleware: By this folder, we can filter the access of visiter.
+   folder app/Http/Middleware: By this folder, we can filter the access of visitor.
 
    folder app/Http/kernel.php: to register the middleware, this file is used.
 

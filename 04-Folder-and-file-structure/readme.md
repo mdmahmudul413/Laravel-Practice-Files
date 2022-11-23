@@ -14,7 +14,7 @@
             ➣ app/Http/controller/controller.php: This is a central unit which control modal and view it means
                its a middle layer of the database and Html pages.
 
-            ➣ app/Http/Middleware: By this folder, we can filter the access of visiter.
+            ➣ app/Http/Middleware: By this folder, we can filter the access of visitor.
 
             ➣ app/Http/kernel.php: to register the middleware, this file is used.
 
@@ -33,12 +33,12 @@
             crating tables, managing data, inserting dummy data etc
 
         5. public: 
-            we can store the public files here like html, css, js files. public/ index.php this file load for the
+            we can store the public files here like html, css, js files. public/index.php this file load for the
             first of laravel app. In pulic/.htaccess, the server configarations are written here. 
 
         6. resources: 
             uncompiled public files like css, js etc are here 
-            resources/ views: total html are written here.
+            resources/views: total html are written here.
 
         7. routes: 
             api routes, channels route , web routes etc
