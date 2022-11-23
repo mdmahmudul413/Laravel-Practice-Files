@@ -1,7 +1,7 @@
 ## **View**
 
     ➢ What is view??
-        ➾ Its a part of MVC(Mdel View Controller) framework. 
+        ➾ Its a part of MVC(Model View Controller) framework. 
 
     ➢ What we do inside view?
         ➾ Inside view, we store our total html part which we want to show the user.
