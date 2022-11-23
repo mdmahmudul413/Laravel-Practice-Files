@@ -1,0 +1,1 @@
+<h1>This is servece page. The dynamic data is {{$name}}</h1>

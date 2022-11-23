@@ -9,7 +9,7 @@
     *** We can call view from controller or directly from routing file.
     *** view is situated at resource/views
 
-    ➢➢Call view by route, 
+    ➢➢ Without passing dynamic data call view by direct routing, 
 
     a. Goto web.php
         write,  
@@ -22,27 +22,26 @@
                 return view('view_name');
             });
 
-    ➢➢ To pass dynamic data 
+        Note: a and b both same
 
-        web.php:
+    ➢➢ Passing dynamic data in direct routing
+
+    a.  web.php,
             Route::get('/user/{name}', function ($name) {
                 return view('users', ['name'=>$name]);
             });
 
-    c. users.blade.php:
+    b. users.blade.php:
 
             <h1>Hello {{$name}}</h1>
 
 
-    @@call view by controller,
+    ➢➢ Without passing dynamic data call view by controller,
 
     a. Generate controller by command line,
             php artisan make:controller UserCon
 
-    b. users.blade.php:
-            <h1>Hello Guys</h1>
-
-    c. UserCon.php 
+    b. Inside UserCon.php, 
 
         write these codes,
             class UserCon extends Controller
@@ -52,16 +51,16 @@
                 }
             }
 
-    d. web.php
+    c. web.php
 
         write these codes,
             use App\Http\Controllers\UserCon;
             Route::get("user", [UserCon::class, "loadView"]);
 
-    ➢➢ To pass dynamic data 
-
-    a. users.blade.php:
-            <h1>Hello {{$name}}</h1>
+    ➢➢ Passing dynamic data in calling view by controller 
+    
+    a. Generate controller by command line,
+            php artisan make:controller UserCon
 
     b. UserCon.php 
 
@@ -73,9 +72,12 @@
                 }
             }
 
-    d. web.php
+    c. web.php
 
         write these codes,
             use App\Http\Controllers\UserCon;
             Route::get("user/{name}", [UserCon::class, "loadView"]);
+    
+    d. users.blade.php:
+            <h1>Hello {{$name}}</h1>
 

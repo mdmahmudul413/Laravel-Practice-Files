@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 class UserCon extends Controller
 {
-    function loadView($name){
-        return view('users', ['name'=>$name]);
+    function loadView(){
+        return view('contact');
+    }
+
+    function viewload($name){
+        return view('services', ['name' => $name]);
     }
 }

@@ -14,14 +14,21 @@ use App\Http\Controllers\UserCon;
 |
 */
 
+// direct routing without passing data
+Route::view('about', 'about');
+
+// direct routing without passing data using function
 Route::get('/', function () {
     return view('welcome');
 });
 
-// passing data from derect routing
-Route::get('/user/{name}', function ($name) {
+// derect routing with passing dynamic data
+Route::get('/users/{name}', function ($name) {
     return view('users', ['name'=>$name]);
 });
 
-// passing data from controller 
-// Route::get("user/{name}", [UserCon::class, "loadView"]);
+// call view from controller without passing dynamic data
+Route::get("contact", [UserCon::class, "loadView"]);
+
+// call view from controller without passing dynamic data
+Route::get('services/{name}', [UserCon::class, 'viewload']);
