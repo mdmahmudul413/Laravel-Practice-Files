@@ -30,19 +30,18 @@
                     $this->title=$componentHeader;
                 }
 
+        
         b. resources/views/components/headers.blade.php
-
-            add header like this,
-            <x-header componentHeader="hello"/>
-
-        c. views/components/headers.blade.php
             add like this,
 
-        <div>
-            <h1>This is {{$title}}'s Header part</h1>
-        </div>
+                <div>
+                    <h1>This is {{$title}}'s Header part</h1>
+                </div>
 
-        d. views/users.blade.php
+        c. views/users.blade.php
 
             add like this, 
                 <x-header componentHeader="User"/>
+
+            Note: Adding slash "/" is important.
+
