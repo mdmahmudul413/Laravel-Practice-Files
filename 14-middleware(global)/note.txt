@@ -24,17 +24,17 @@
 
     3. Write the conditions or checks or set of rules in the app/http/middleware/checkAge.php like bellow
 
-    public function handle(Request $request, Closure $next)
-        {
-            echo "Global message is printed in every page";
-            if($request->age && $request->age<18){
-                return redirect('noaccess');
+        public function handle(Request $request, Closure $next)
+            {
+                echo "Global message is printed in every page";
+                if($request->age && $request->age<18){
+                    return redirect('noaccess');
+                }
+                if($request->age && $request->age>17){
+                    return redirect('user');
+                }
+                return $next($request);
             }
-            if($request->age && $request->age>17){
-                return redirect('user');
-            }
-            return $next($request);
-        }
 
     4. Then, create route in the web.php
 
