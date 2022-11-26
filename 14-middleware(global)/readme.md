@@ -1,0 +1,54 @@
+## **Global Middleware**
+
+    ➢➢➢ What is middleware??
+    
+        If we want to add some set of rules or some conditions in our website page then we have to use middlewares. 
+
+        In this way, we just write down codes in a single place then use in different places whenever we want to use.
+
+    ➢➢➢ There are three types of middlewares. they are,
+
+        1. Global Middleware
+        2. Grouped Middleware
+        3. Routed Middleware
+
+    ➢➢➢ How to use middleware?
+
+    1. Make multiple views like
+
+        user.blade.php, noaccess.blade.php
+
+    2. Make a middleware
+
+        command: php artisan make:middleware checkAge
+
+    3. Write the conditions or checks or set of rules in the app/http/middleware/checkAge.php like bellow
+
+        public function handle(Request $request, Closure $next)
+            {
+                echo "Global message is printed in every page";
+                if($request->age && $request->age<18){
+                    return redirect('noaccess');
+                }
+                if($request->age && $request->age>17){
+                    return redirect('user');
+                }
+                return $next($request);
+            }
+
+    4. Then, create route in the web.php
+
+        Route::view('user', 'user');
+        Route::view('noaccess', 'noaccess');
+
+    5. Then go to app/http/kernel.php
+
+        There are three arays. global, group, routed. for now, we use global array and add the middleware like bellow
+        \App\Http\Middleware\checkAge::class
+
+    6. Now write url like bellow
+
+        localhost?age=15 , it will redirect the view noaccess.blade.php
+        localhost?age=30 , it will redirect the view user.blade.php
+
+    7. It's a global middleware, so that the set of rules will apply in every pages
