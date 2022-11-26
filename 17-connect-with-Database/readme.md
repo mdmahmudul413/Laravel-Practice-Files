@@ -54,15 +54,15 @@
 
 
         ➢➢➢ If this(could not find driver (SQL: select * from users)) kind of error happand
-        solution is,
+            solution is,
 
-            command,
-                1. composer update   
-                2. composer require doctrine/dbal
+                command,
+                    1. composer update   
+                    2. composer require doctrine/dbal
 
-        then, go to php.ini and uncomment this line,
+                then, go to php.ini and uncomment this line,
 
-            ;extension=pdo_mysql.so
+                    ;extension=pdo_mysql.so
 
 
 
