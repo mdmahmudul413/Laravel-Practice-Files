@@ -1,0 +1,66 @@
+## **Model**
+
+    ➢➢➢ Connect database through model
+
+    ➢➢➢ What is model?
+    
+        Model maps database tables with class name, define database structure, write business login
+
+        Note: If the table name is users then we have to make model name user. it means table name should be plural and model name should be singular.
+
+    ➢➢➢ How to make model and use??
+
+        1. make a model
+
+            command: php artisan make:model User
+
+        2. To use this model, we have to make controller
+
+            command: php artisan make:controller UserController
+
+        3. Import model to controller
+
+            add this line of code at the top, use App\Models\User;
+
+    4. Make a function to fetch data in the controller
+
+        class UserController extends Controller
+        {
+            function getData(){
+                return User::all();
+            } 
+        }
+
+    5. Make a route of this controller
+
+        Add this at the top,
+            
+            use App\Http\Controllers\UserController;
+
+        Add this at the top bottom,
+            
+            Route::get('users', [UserController::class, 'getData']);
+
+
+    6. go to .env file to add db info 
+
+    7. then browse localhost/users
+
+    8. if there is another table to show name employee
+
+        Go to the model(app/model/user.php) and add this line
+
+            class User extends Authenticatable
+            {
+                use HasApiTokens, HasFactory, Notifiable;
+
+                <!-- add bellow line only -->
+                public $table = "employee";
+
+                ...
+            }
+
+        Then, browse localhost/users
+
+
+
