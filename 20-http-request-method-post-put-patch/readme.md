@@ -110,7 +110,8 @@
 
                 Route::post('users', [UserController::class, 'testRequest']);
                 
-            ➠ At the time of POST, data will not sumbit through URL. It will submit directly. And POST method is safe for submitting data instead of the GET method.
+            ➠ At the time of POST, data will not sumbit through URL. It will submit directly. And POST method is safe
+               for submitting data instead of the GET method.
 
             ➠ Note: We have to always keep match the both method of form and route. if there is missmatch, data will not pass.  
             
