@@ -82,7 +82,8 @@
 
         ➠ Note: When we use 'get' method, data will submit through URL
 
-        ➠ Note: When we use 'get' method, user and pass will visible in the url but in post method it doesn't. for this reason, get method is not a safe method.
+        ➠ Note: When we use 'get' method, user and pass will visible in the url but in post method it doesn't. for 
+           this reason, get method is not a safe method.
 
 
 
