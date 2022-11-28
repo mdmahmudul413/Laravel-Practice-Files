@@ -162,8 +162,8 @@
 
 
 
-    ➠ Note: GET is used for data fetching, POST is used for data inserting or saving, PUT is used for data updating, DELETE is 
-       for deleting data.
+    ➠ Note: GET is used for data fetching, POST is used for data inserting or saving, PUT is used for data 
+       updating, DELETE is for deleting data.
 
     ➠ HEAD method is by default always sent.
 
