@@ -1,0 +1,72 @@
+## **Flash Session**
+
+    ➢➢➢ what is flash session?
+
+        At the case of normal session, we can reuse it multiple time. But flash session will be destroyed after use it once. 
+
+    ➢➢➢ How to make and use flash session?
+
+        1.  Make a view name storeuser.blade.php 
+
+        2. Make a html form in the view
+
+            <h1>Add new member</h1>
+            <form action="user" method="post">
+                @csrf
+                <input type="text" name="user" placeholder="Enter your username"><br><br>
+                <input type="password" name="password" placeholder="Enter your password"><br><br>
+                <input type="email" name="email" placeholder="Enter your email"><br><br>
+                <button type="submit">Add User</button>
+            </form>
+
+        3. make a route of this view
+
+            Route::view('store', 'storeuser');
+
+        4. make a controller name StoreController
+
+            command: php artisan make:controller StoreController
+
+        5. Make a function in it 
+
+                class StoreController extends Controller
+                {
+                    function storeM(Request $req){
+                        return $req->input();
+                    }
+                }
+
+        6. Make a route of the controller in the web.php
+
+            At the top add this line,
+
+                use App\Http\Controllers\StoreController;
+
+            At the bottom add this line,
+
+                Route::post('user', [StoreController::class, 'storeM']);
+
+        7. To store data in the flash session we have to modify the function in the controller
+
+            class StoreController extends Controller
+            {
+                function storeM(Request $req){
+                    $data = $req->input('user');
+                    $req->session()->flash('user', $data);
+                    return redirect('store');
+                }
+            }                    
+
+        8. A small modification in the html form
+
+                <h1>Add new member</h1>
+                @if(session('user'))
+                <h3>Data saved for {{session('user')}}</h3>
+                @endif
+                <form action="user" method="post">
+                    @csrf
+                    <input type="text" name="user" placeholder="Enter your username"><br><br>
+                    <input type="password" name="password" placeholder="Enter your password"><br><br>
+                    <input type="email" name="email" placeholder="Enter your email"><br><br>
+                    <button type="submit">Add User</button>
+                </form>
