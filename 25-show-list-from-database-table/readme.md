@@ -68,7 +68,7 @@
 
             class UserController extends Controller
             {
-                function getData(){
+                function show(){
                     $data = Member::all();
                     return view('list', ['members' => $data]);
                 } 
