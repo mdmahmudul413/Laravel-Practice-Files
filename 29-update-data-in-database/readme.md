@@ -2,6 +2,7 @@
 
     ➢➢➢ How to Update Data in Database steps are given bellow
 
+
         1. Go to .env file to add db info 
 
 
@@ -25,7 +26,7 @@
 
 
 
-        3. Create another view file name edit.blade.php & create a form inside there 
+        4. Create another view file name edit.blade.php & create a form inside there 
 
             <h1>Update Member</h1>
             <form action="/edit" method="POST">
@@ -39,25 +40,26 @@
 
 
 
-         5. Make a controller name MemberController
+        5. Make a controller name MemberController
 
             command: php artisan make:controller MemberController
 
 
 
-        9. Make a model name Member
+        6. Make a model name Member
 
             command: php artisan make:model Member
 
 
 
-        10. Import model inside the controller
+        7. Import model inside the controller
 
             Add this line of code at the top, use App\Models\Member;
 
 
 
-        6. Make a function inside the controller to return the view list.blade.php with member table data
+        8. Make a function inside the controller to return the view list.blade.php 
+           with member table data
 
             class MemberController extends Controller
             {
@@ -70,7 +72,7 @@
 
 
 
-        4. Make a route of view file list.blade.php
+        9. Make a route of view file list.blade.php
 
             at the top,
 
@@ -82,7 +84,7 @@
 
 
 
-        5. Modify the table inside list.blade.php
+        10. Modify the table inside list.blade.php
 
             <h1>Member List</h1>
             <table border="1">
@@ -110,13 +112,13 @@
 
 
 
-        7. Make the route of edit.blade.php file
+        11. Make the route of edit.blade.php file
 
             Route::get('edit/{id}', [MemberController::class, 'showData']);
 
 
 
-        5. Modify the form inside edit.blade.php
+        12. Modify the form inside edit.blade.php
 
             <h1>Update Member</h1>
             <form action="" method="POST">
@@ -130,7 +132,7 @@
         
        
 
-        6. Make a function inside the controller for returning the view file edit.blade.php
+        13. Make a function inside the controller for returning the view file edit.blade.php
 
             class UserController extends Controller
             {
@@ -142,7 +144,7 @@
 
 
 
-        8. Add form action value in the addMembers.blade.php 
+        14. Add form action value in the addMembers.blade.php 
             
             <h1>Update Member</h1>
             <form action="/edit" method="POST">
@@ -156,7 +158,7 @@
 
 
 
-        11. create the functionality inside controller for updating data
+        15. create the functionality inside controller for updating data
 
             class MemberController extends Controller
             {
@@ -172,6 +174,6 @@
 
 
 
-        12. Make the route of update function
+        16. Make the route of update function
 
             Route::post('edit', [MemberController::class, 'update']);
