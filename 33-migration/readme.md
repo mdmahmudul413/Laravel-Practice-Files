@@ -1,4 +1,4 @@
-## **Joins**
+## **Migration**
 
     ➢➢➢ What is migration?
     

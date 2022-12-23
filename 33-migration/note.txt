@@ -1,147 +1,68 @@
-## **Query Builder**
+## **Migration**
 
-    ➢➢➢ In laravel, we can connect with database in two ways
+    ➢➢➢ What is migration?
     
-        a. Using laravel class "DB" [ Query Builder ]
-        b. Using Model [ Eloquent ORM(object-relational mapper) ]
+        In laravel, we don't need to create table manually in the database. When we need to add another collumn to the database, 
+        we also need not to do this manually. We just make a command to create a migration file. Then define the database 
+        structure inside that file and migrate it.
         
-    ➢➢➢ How to use Query Builder steps are given bellow
+    ➢➢➢ What is the benefit migration?
+    
+        When entire team work on a single database, multiple developers have to work on same table. Every developer add field into
+         database on their need. Finally when they need to merge the database, it is easy to merge the project instead of merging
+          the database. By the help of migration we don't need to touch the database, we can merge the database by modifying
+           migration files. so that, we always use migration in laravel.
+        
+    ➢➢➢ How to create migration in the database
     
         1. Go to .env file to add db info 
 
 
-        2. Make a controller name MemberController
+        2. Create a migration file for creating test table
         
-            command: php artisan make:controller MemberController
-                    
-                    
-        3. Make a function inside the controller
+            command: php artisan make:migration create_test_table
+            
+            
+        3. Inside the migration file, there are two functions up and down
         
-            class MemberController extends Controller
+            public function up()
             {
-                function operation(){
-                    ehco 'Code will be here';
-                }
+                $table->id();
+                $table->timestamps();
+
             }
-            
-            
-        4. Make a route of this controller
-        
-            Add this at the top,
-                
-                use App\Http\Controllers\MemberController;
-            
-            Add this at the top bottom,
-                
-                Route::post('list', [MemberController::class, 'operation']); 
-
-        
-        5. Import database class inside controller
-        
-            use Illuminate\Support\Facades\DB;
-            
-            
-        6. Make a view file name list.blade.php
-
-            
-        7. Write a function to get full data in the view inside controller
-        
-            class MemberController extends Controller
+            public function down()
             {
-                function operation(){
-                    $data = DB::table('members')->get();
-                    return view('list', ['data' => $data]);
-                }
-            }
-            
-
-        8. Create a table in list.blade.php 
-
-            <h1>Member List</h1>
-            <table border="1">
-                <tr>
-                    <td><b>Id</b></td>
-                    <td><b>Name</b></td>
-                    <td><b>Email</b></td>
-                    <td><b>Contact</b></td>
-                </tr>
-            
-                @foreach($data as $item)
-                <tr>
-                    <td>{{$item->id}}</td>
-                    <td>{{$item->name}}</td>
-                    <td>{{$item->email}}</td>
-                    <td>{{$item->contact}}</td>
-                </tr>
-                @endforeach
-            </table>
-
-
-        9. Function to find a data with id key using "where" condition
-        
-            class MemberController extends Controller
-            {
-                function operation(){
-                    $data = DB::table('members')
-                        ->where('id', 4)
-                        ->get();
-                        return view('list', ['data' => $data]);
-                }
-            }
-              
-                    
-        10. Function to find a data with find method.
-        
-            class MemberController extends Controller
-            {
-                function operation(){
-                             return DB::table('members')->find(4);
-                }
-            }  
-              
-                    
-        11. Function to find a data with find method.
-        
-            class MemberController extends Controller
-            {
-                function operation(){
-                             return DB::table('members')->find(4);
-                }
+                Schema::dropIfExists('test');
             } 
+            
+        Note: up function is responsible for creating table and down function is responsible for deleting table.
               
                     
-        12. Function to Data Insertion
-        
-            class MemberController extends Controller
-            {
-                return DB::table('members')->insert([
-                    'name' => "Muhammad",
-                    'email' => "Muhammad@test",
-                    'contact' => "234567890"
-                ]);
-            }
-              
                     
-        13. Function to Data Updation
+        3. We can modify the up function to add more fields inside test table
         
-            class MemberController extends Controller
+            public function up()
             {
-                return DB::table('members')
-                ->where('id', 19)
-                ->update([
-                    'name' => "Montu",
-                    'email' => "Muhammad@test",
-                    'contact' => "UK"
-                ]);
+                Schema::create('test', function (Blueprint $table) {
+                    $table->id();
+                    $table->string('name');
+                    $table->string('email');
+                    $table->string('address');
+                    $table->timestamps();
+                });
             }
-              
-                    
-        14. Function to Data Deletion
+            
+        Note: Every developer will have this file. So that, they don't need to manually change or modify the database. They can
+         just migrate the existing migration.     
+            
+            
+            
+        4. Now to create test table in the database, we have to make another command
         
-            class MemberController extends Controller
-            {
-                return DB::table('members')
-                ->where('id', 19)
-                ->delete();
-            }
-                    
+            command: php artisan migrate
+            
+
+           
+           
+           

@@ -1,26 +1,25 @@
-## **Query Builder**
+## **Joins**
 
-    ➢➢➢ In laravel, we can connect with database in two ways
+    ➢➢➢ Why we need join?
     
-        a. Using laravel class "DB" [ Query Builder ]
-        b. Using Model [ Eloquent ORM(object-relational mapper) ]
+        When we want to fetch data from two table, we need join. To apply join into two table, there must be some common information between the tables.
         
-    ➢➢➢ How to use Query Builder steps are given bellow
+    ➢➢➢ How to apply joins steps are given bellow
     
         1. Go to .env file to add db info 
 
 
-        2. Make a controller name MemberController
+        2. Make a controller name EmployeeController
         
-            command: php artisan make:controller MemberController
+            command: php artisan make:controller EmployeeController
                     
                     
         3. Make a function inside the controller
         
-            class MemberController extends Controller
+            class EmployeeController extends Controller
             {
-                function operation(){
-                    ehco 'Code will be here';
+                function getData(){
+                    echo 'Hello from controller';
                 }
             }
             
@@ -29,11 +28,11 @@
         
             Add this at the top,
                 
-                use App\Http\Controllers\MemberController;
+                use App\Http\Controllers\EmployeeController;
             
             Add this at the top bottom,
                 
-                Route::post('list', [MemberController::class, 'operation']); 
+                Route::post('list', [EmployeeController::class, 'getData']); 
 
         
         5. Import database class inside controller
@@ -41,107 +40,89 @@
             use Illuminate\Support\Facades\DB;
             
             
-        6. Make a view file name list.blade.php
-
             
-        7. Write a function to get full data in the view inside controller
+        6. Modify the function to get full data from employee table
         
             class MemberController extends Controller
             {
                 function operation(){
-                    $data = DB::table('members')->get();
-                    return view('list', ['data' => $data]);
+                    return DB::table('employee')->get();
                 }
             }
             
-
-        8. Create a table in list.blade.php 
-
-            <h1>Member List</h1>
-            <table border="1">
-                <tr>
-                    <td><b>Id</b></td>
-                    <td><b>Name</b></td>
-                    <td><b>Email</b></td>
-                    <td><b>Contact</b></td>
-                </tr>
             
-                @foreach($data as $item)
-                <tr>
-                    <td>{{$item->id}}</td>
-                    <td>{{$item->name}}</td>
-                    <td>{{$item->email}}</td>
-                    <td>{{$item->contact}}</td>
-                </tr>
-                @endforeach
-            </table>
+            
+        7. Modify the function to join employee and company table
+        
+            class MemberController extends Controller
+            {
+                return DB::table('employee')
+                ->join('company', 'employee.id', '=', 'company.employee_id')
+                ->get();
+            }
+            
+            
+            
+        8. Join query with select key word(if we need only one table details)
+        
+            class MemberController extends Controller
+            {
+                return DB::table('employee')
+                ->join('company', 'employee.id', '=', 'company.employee_id')
+                ->select('employee.*')
+                ->get();
+            }
+            
+            
+            
+        9. Joins query with select key word(when we need multiple table data)
+        
+            class MemberController extends Controller
+            {
+                return DB::table('employee')
+                ->join('company', 'employee.id', '=', 'company.employee_id')
+                ->select('company.*', 'employee.*')
+                ->get();
+            }
+            
+            
+            
+        10. Joins query with where key word
 
+            class MemberController extends Controller
+            {
+                return DB::table('employee')
+                ->join('company', 'employee.id', '=', 'company.employee_id')
+                ->where('employee.name', 'redoan')
+                ->get();
+            }
+            
+            
+            
+        11. Another joins query with where key word
 
-        9. Function to find a data with id key using "where" condition
-        
             class MemberController extends Controller
             {
-                function operation(){
-                    $data = DB::table('members')
-                        ->where('id', 4)
-                        ->get();
-                        return view('list', ['data' => $data]);
-                }
+                return DB::table('employee')
+                ->join('company', 'employee.id', '=', 'company.employee_id')
+                ->where('employee.id', '2')
+                ->get();
             }
-              
-                    
-        10. Function to find a data with find method.
-        
+            
+            
+            
+        12. Joins query with where & select key word
+
             class MemberController extends Controller
             {
-                function operation(){
-                             return DB::table('members')->find(4);
-                }
-            }  
-              
-                    
-        11. Function to find a data with find method.
-        
-            class MemberController extends Controller
-            {
-                function operation(){
-                             return DB::table('members')->find(4);
-                }
-            } 
-              
-                    
-        12. Function to Data Insertion
-        
-            class MemberController extends Controller
-            {
-                return DB::table('members')->insert([
-                    'name' => "Muhammad",
-                    'email' => "Muhammad@test",
-                    'contact' => "234567890"
-                ]);
+                return DB::table('employee')
+                ->join('company', 'employee.id', '=', 'company.employee_id')
+                ->where('employee.id', '2')
+                ->select('employee.name')
+                ->get();
             }
-              
-                    
-        13. Function to Data Updation
-        
-            class MemberController extends Controller
-            {
-                return DB::table('members')
-                ->where('id', 19)
-                ->update([
-                    'name' => "Montu",
-                    'email' => "Muhammad@test",
-                    'contact' => "UK"
-                ]);
-            }
-              
-                    
-        14. Function to Data Deletion
-        
-            class MemberController extends Controller
-            {
-                return DB::table('members')
-                ->where('id', 19)
-                ->delete();
-            }
-                    
+            
+
+           
+           
+           
