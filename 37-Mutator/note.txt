@@ -1,0 +1,84 @@
+## **Mutator**
+
+    ➢➢➢ what is Mutator?
+
+        sometimes we have to add some additional information with the user inputted data before inserting the data to the database. In this case, we have to use
+        mutator to modify the user inputted data.
+
+    ➢➢➢ how to make and use??
+
+        1. Make a controller name MemberController
+
+            command: php artisan make:controller MemberController
+
+        2. Define a function inside the controller
+
+            class MemberController extends Controller
+            {
+                function index(){
+                    return "Hello from controller";
+                }
+            }
+
+        3. Make a route for the controller
+
+            At the top,
+                use App\Http\Controllers\MemberController;
+
+            At the bottom,
+                Route::get('member', [MemberController::class, 'index']);
+
+        4. Make a model name Member
+
+            command: php artisan make:model Member
+
+        5. Import the model to the controller
+
+            use App\Models\Member;
+
+
+        6. Modify the controller function to check the data are shown or not
+
+            class MemberController extends Controller
+            {
+                function index(){
+                    return Member::all();
+                }
+            }
+
+
+        6. now write the code to insert data in the database in the controller function
+
+            class MemberController extends Controller
+            {
+                function index(){
+                    $member = new Member;
+                    $member->name = "bruce";
+                    $member->email = "bruce@gmail.com";
+                    $member->address = "New York";
+                    $member->save();
+                }
+            }
+
+        7. Then, define mutator in the model
+
+            class Member extends Model
+            {
+                public $timestamps = false;
+
+                use HasFactory;
+
+                public function setNameAttribute($value){
+                    return $this->attributes['name'] = "Mr. ".$value;
+                }
+
+                public function setAddressAttribute($value){
+                    return $this->attributes['address'] = $value.", USA";
+                }
+            }
+
+        Note: Function name format is "setFieldNameAttribute()"
+
+        8. We have to add this line for bypass the additional field requirement
+
+            public $timestamps = false;
